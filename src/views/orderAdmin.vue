@@ -13,28 +13,24 @@
       <el-button size="small" style="margin-left:7px;">查询</el-button>
     </el-form>
     <el-table :data="addlist" stripe style="width: 100%;margin-top:10px;" border>
-      <el-table-column prop="id" label="订单号" width="180">
+      <el-table-column prop="orderNo" label="订单号" width="180">
       </el-table-column>
-      <el-table-column prop="name" label="收件人" width="180">
+      <el-table-column prop="receiverName" label="收件人" width="180">
       </el-table-column>
-      
-      <el-table-column label="订单状态">
-        <template>
-          <p>未支付</p>
-          <p>已支付</p>
-          <p>已取消</p>
+      <el-table-column prop="statusDesc" label="订单状态">
+      </el-table-column>
+      <el-table-column  label="订单总价">
+        <template slot-scope="scope">
+          <p>￥{{scope.row.payment}}</p>
         </template>
       </el-table-column>
-      <el-table-column prop="price" label="订单总价"></el-table-column>
-      <el-table-column prop="time" label="创建时间"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间"></el-table-column>
       <el-table-column label="操作">
         <template>
           <el-button type="warning" icon="el-icon-thumb">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination style="margin-top:10px;margin-left:10px" background layout="prev, pager, next" :total="total">
-    </el-pagination>
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pagenum" :page-sizes="[10, 15, 20, 30]" :page-size="pagesize"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
@@ -51,7 +47,7 @@ export default {
         {
           value: '1',
           label: '按订单号查询',
-        }
+        },
       ],
       value: '',
       addlist: [],
@@ -67,7 +63,9 @@ export default {
   methods: {
     async sqw() {
       let num = this.pagenum
-      let res = await this.$axios.list(num)
+      let res = await this.$axios.order(num)
+      this.addlist = res.data.list
+      this.total = res.data.total
       console.log(res)
     },
     handleSizeChange(n) {

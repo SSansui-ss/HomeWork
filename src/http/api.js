@@ -33,10 +33,19 @@ function Class(num) {
 		hideLoading: false,
 	})
 }
+//订单列表
+function order(num) {
+	return http({
+		url: `manage/order/list.do?pageNum=${num}`,
+		method: 'get',
+		hideLoading: false,
+	})
+}
 
 export default {
 	login,
 	list,
   logout,
-  Class
+  Class,
+  order
 }
