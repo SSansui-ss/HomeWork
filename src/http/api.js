@@ -81,6 +81,30 @@ function ShopListID(id) {
 		hideLoading: false,
 	})
 }
+//品类管理 - 修改名称
+function ClassUp(id,name) {
+	return http({
+		url: `manage/category/set_category_name.do?categoryId=${id}&categoryName=${name}`,
+		method: 'get',
+		hideLoading: false,
+	})
+}
+//订单管理 - 条件查找
+function orderSe(id) {
+	return http({
+		url: `manage/order/search.do?listType=search&pageNum=1&orderNo=${id}`,
+		method: 'get',
+		hideLoading: false,
+	})
+}
+//订单管理 - 查看
+function orderGo(id) {
+	return http({
+		url: `manage/order/detail.do?orderNo=${id}`,
+		method: 'get',
+		hideLoading: false,
+	})
+}
 
 export default {
 	login,
@@ -93,4 +117,7 @@ export default {
   ShopListID,
   searchID,
   searchName,
+  ClassUp,
+  orderSe,
+  orderGo
 }

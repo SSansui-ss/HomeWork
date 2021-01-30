@@ -9,8 +9,8 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
-      <el-input placeholder="关键字" style="width:200px;margin-left:7px;" size="small"></el-input>
-      <el-button size="small" style="margin-left:7px;">查询</el-button>
+      <el-input placeholder="关键字"  v-model="txt" style="width:200px;margin-left:7px;" size="small"></el-input>
+      <el-button size="small" style="margin-left:7px;" @click="go">查询</el-button>
     </el-form>
     <el-table :data="addlist" stripe style="width: 100%;margin-top:10px;" border>
       <el-table-column prop="orderNo" label="订单号" width="180">
@@ -26,8 +26,8 @@
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间"></el-table-column>
       <el-table-column label="操作">
-        <template>
-          <el-button type="warning" icon="el-icon-thumb">查看</el-button>
+        <template slot-scope="scope">
+          <el-button type="warning" icon="el-icon-thumb" @click="$router.push(`/orderAdmin/detail?id=${scope.row.orderNo}`)">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -51,6 +51,7 @@ export default {
       ],
       value: '',
       addlist: [],
+      txt:'',
       total: '',
       pagenum: 1,
       pagesize: 10,
@@ -76,6 +77,15 @@ export default {
       this.pagenum = n
       this.sqw()
     },
+    async go(){
+      let res = await this.$axios.orderSe(this.txt)
+      console.log(res);
+      if(res.status == 1){
+        this.$message.success(res.msg)
+      }else{
+        this.addlist = res.data.list 
+      }
+    }
   },
   // 计算属性
   computed: {},

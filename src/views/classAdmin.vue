@@ -10,14 +10,23 @@
       </el-table-column>
       <el-table-column prop="name" label="品类名称" width="580">
       </el-table-column>
-      
+
       <el-table-column label="操作">
-        <template>
-          <el-button type="warning" size="mini" icon="el-icon-thumb">修改名称</el-button>
+        <template slot-scope="scope">
+          <el-button type="warning" size="mini" icon="el-icon-thumb" @click="Up(scope.row)">修改名称</el-button>
           <el-button type="warning" size="mini" icon="el-icon-edit">查看其子分类</el-button>
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <p>请输入新的品类名称</p>
+      <el-input  style="margin-top:10px" v-model="txt"  size="normal" clearable></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="Yes_up">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -28,6 +37,9 @@ export default {
   data() {
     return {
       addlist: [],
+      dialogVisible: false,
+      txt:'',
+      id:''
     }
   },
   mounted() {
@@ -40,6 +52,20 @@ export default {
       let res = await this.$axios.Class(num)
       this.addlist = res.data
       console.log(res)
+    },
+    Up(ind){
+      this.txt = ind.name
+      this.id = ind.id
+      this.dialogVisible = true
+    },
+    async Yes_up(){
+      let res = await this.$axios.ClassUp(this.id,this.txt)
+      console.log(res);
+      if(res.status == 0){
+        this.$message.success(res.data)
+        this.sqw()
+        this.dialogVisible = false
+      }
     }
   },
   // 计算属性

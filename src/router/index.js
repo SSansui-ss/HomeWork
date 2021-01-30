@@ -67,6 +67,14 @@ const routes = [
 					bread: [{ name: '订单管理' }],
 				},
 			},
+			{
+				path: '/orderAdmin/detail',
+				name: 'OrderAdmin_detail',
+				component: () => import('@/views/orderAdmin_detail'),
+				meta: {
+					bread: [{ name: '订单详情' }],
+				},
+			},
 		],
 	},
 	{
