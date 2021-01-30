@@ -7,9 +7,12 @@ const http = axios.create({
 
 import { Loading } from 'element-ui'
 
+
 // 请求拦截
 http.interceptors.request.use(
 	(config) => {
+    let cookies = document.cookie
+    console.log(cookies)
 		 
 		return config
 	},

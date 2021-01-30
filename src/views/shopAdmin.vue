@@ -15,10 +15,10 @@
     <el-table :data="addlist" stripe style="width: 100%;margin-top:10px;" border>
       <el-table-column prop="id" label="id" width="180">
       </el-table-column>
-      <el-table-column  label="信息" width="180">
+      <el-table-column label="信息" width="180">
         <template slot-scope="scope">
-            <p>{{scope.row.name}}</p>
-            <p>{{scope.row.subtitle}}</p>
+          <p>{{scope.row.name}}</p>
+          <p>{{scope.row.subtitle}}</p>
         </template>
       </el-table-column>
       <el-table-column prop="price" label="价格">
@@ -65,8 +65,8 @@ export default {
       value: '',
       addlist: [],
       total: '',
-      pagenum:1,
-      pagesize:10
+      pagenum: 1,
+      pagesize: 10,
     }
   },
   mounted() {
@@ -81,11 +81,13 @@ export default {
       this.total = res.data.total
       this.addlist = res.data.list
     },
-    handleSizeChange(n) {
-      console.log(n)
+    handleSizeChange(s) {
+      this.pagesize = s
+      this.sqw()
     },
-    handleCurrentChange(s) {
-      console.log(s)
+    handleCurrentChange(n) {
+      this.pagenum = n
+      this.sqw()
     },
   },
   // 计算属性

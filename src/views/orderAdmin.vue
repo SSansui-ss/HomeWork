@@ -19,7 +19,7 @@
       </el-table-column>
       <el-table-column prop="statusDesc" label="订单状态">
       </el-table-column>
-      <el-table-column  label="订单总价">
+      <el-table-column label="订单总价">
         <template slot-scope="scope">
           <p>￥{{scope.row.payment}}</p>
         </template>
@@ -68,11 +68,13 @@ export default {
       this.total = res.data.total
       console.log(res)
     },
-    handleSizeChange(n) {
-      console.log(n)
+    handleSizeChange(s) {
+      this.pagesize = s
+      this.sqw()
     },
-    handleCurrentChange(s) {
-      console.log(s)
+    handleCurrentChange(n) {
+      this.pagenum = n
+      this.sqw()
     },
   },
   // 计算属性
