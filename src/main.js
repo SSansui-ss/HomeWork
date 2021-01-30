@@ -4,6 +4,12 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor);
+
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
