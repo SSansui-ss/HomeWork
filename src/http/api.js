@@ -89,6 +89,14 @@ function ClassUp(id,name) {
 		hideLoading: false,
 	})
 }
+//品类管理 - 添加品类
+function ClassP(id,name) {
+	return http({
+		url: `manage/category/add_category.do?parentId=${id}&categoryName=${name}`,
+		method: 'get',
+		hideLoading: false,
+	})
+}
 //订单管理 - 条件查找
 function orderSe(id) {
 	return http({
@@ -119,5 +127,6 @@ export default {
   searchName,
   ClassUp,
   orderSe,
-  orderGo
+  orderGo,
+  ClassP
 }

@@ -52,6 +52,14 @@ const routes = [
 				},
 			},
 			{
+				path: '/classPush',
+				name: 'classPush',
+				component: () => import('@/views/classPush'),
+				meta: {
+					bread: [{ name: '品类管理 -- 添加品类' }],
+				},
+			},
+			{
 				path: '/classAdmin',
 				name: 'ClassAdmin',
 				component: () => import('@/views/classAdmin'),

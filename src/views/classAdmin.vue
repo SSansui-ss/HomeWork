@@ -2,7 +2,7 @@
   <div class="box">
     <div class="top">
       <p class="mb" v-for="(item,index) in this.$store.state.bread" :key="index">{{item.name}}</p>
-      <el-button type="primary" size="small" icon="el-icon-plus">添加品类</el-button>
+      <el-button type="primary" size="small" @click="$router.push('/classPush')" icon="el-icon-plus">添加品类</el-button>
     </div>
     <p style="margin-top:15px">当前商品分类ID: 0</p>
     <el-table :data="addlist" stripe style="width: 100%;margin-top:10px;" border>

@@ -13,7 +13,10 @@
       <el-button size="small" style="margin-left:7px;" @click="go">查询</el-button>
     </el-form>
     <el-table :data="addlist" stripe style="width: 100%;margin-top:10px;" border>
-      <el-table-column prop="orderNo" label="订单号" width="180">
+      <el-table-column  label="订单号" width="180">
+        <template slot-scope="scope">
+          <a @click="$router.push(`/orderAdmin/detail?id=${scope.row.orderNo}`)">{{scope.row.orderNo}}</a>
+        </template>
       </el-table-column>
       <el-table-column prop="receiverName" label="收件人" width="180">
       </el-table-column>
@@ -108,5 +111,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #cebfbf;
+}
+a{
+  cursor: pointer;
+  color: blue;
 }
 </style>
